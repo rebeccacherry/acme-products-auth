@@ -50,6 +50,16 @@ export const login = (credentials)=> {
   };
 };
 
+export const register = (credentials)=> {
+  return async(dispatch)=> {
+    const response = await axios.post('/api/auth/register', credentials);
+    const token = response.data.token;
+    window.localStorage.setItem('token', token);
+    dispatch(loginWithToken());
+    //dispatch({ type: 'SET_AUTH', auth: response.data });
+  };
+};
+
 const reducer = combineReducers({
   products,
   auth
