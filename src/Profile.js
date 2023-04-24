@@ -11,21 +11,19 @@ const Profile = ()=> {
   const navigate = useNavigate();
 
   useEffect(()=> {
-    console.log(user)
     if(auth.id){
-        setLuckyNumber(auth.luckyNumber) // has the update field show the current lucky number
+      setLuckyNumber(auth.luckyNumber);
     }
   }, [auth]);
 
   const _update = async(ev)=> {
     ev.preventDefault();
-    dispatch(updateAuth( {luckyNumber })) // allows the dispatch from store to happen
-  
+    dispatch(updateAuth({ luckyNumber }));
   };
   return (
     <form onSubmit={ _update }>
       <input placeholder='luckyNumber' value={ luckyNumber } onChange={ ev => setLuckyNumber(ev.target.value)}/>
-      <button disabled = { luckyNumber === auth.luckyNumber }>Update</button>
+      <button disabled={ luckyNumber === auth.luckyNumber }>Update</button>
     </form>
   );
 };

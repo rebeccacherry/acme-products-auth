@@ -18,18 +18,17 @@ const Product = conn.define('product', {
 
 const User = conn.define('user', {
   username: {
-    type: STRING, 
+    type: STRING,
     unique: true
   },
   password: {
-    type: STRING,
-    unique: true
+    type: STRING
   },
   luckyNumber: {
     type: INTEGER,
     allowNull: false,
     defaultValue: 7
-  }
+  },
 });
 
 User.addHook('beforeSave', async (user)=> {
