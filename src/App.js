@@ -24,7 +24,7 @@ const App = ()=> {
           <Link to='/login'>Login</Link> 
           <Link to='/register'>Register</Link> 
           </div> :
-          <button onClick={ ()=> dispatch(logout())}>Logout {auth.username }</button>
+          <button onClick={ ()=> dispatch(logout())}>Logout {auth.username } : Your lucky number is {auth.luckyNumber} </button>
       }
       
       <Routes>
