@@ -19,7 +19,11 @@ const App = ()=> {
       <h1><Link to='/'>Acme Product Search</Link></h1>
       <Link to='/products'>Products ({ products.length })</Link>
       {
-        !auth.id ? <Link to='/login'>Login</Link> :
+          !auth.id ? 
+          <div>
+          <Link to='/login'>Login</Link> 
+          <Link to='/register'>Register</Link> 
+          </div> :
           <button onClick={ ()=> dispatch(logout())}>Logout {auth.username }</button>
       }
       

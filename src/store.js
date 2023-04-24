@@ -61,15 +61,10 @@ export const register = (credentials)=> {
     const token = response.data.token;
     window.localStorage.setItem('token', token);
     dispatch(loginWithToken());
-<<<<<<< HEAD
-    
+
   }
 }
-=======
-    //dispatch({ type: 'SET_AUTH', auth: response.data });
-  };
-};
->>>>>>> 9b631c659bef376cfea73feef6ad25d9c99a7b31
+
 
 const reducer = combineReducers({
   products,
