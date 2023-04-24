@@ -14,8 +14,13 @@ const auth = (state = {}, action)=> {
   if(action.type === 'SET_AUTH'){
     return action.auth;
   }
+  if(action.type === 'CREATE_AUTH'){
+    return [...state, action.auth]
+  }
   return state;
 };
+
+
 
 export const fetchProducts = ()=> {
   return async(dispatch)=> {
@@ -49,6 +54,16 @@ export const login = (credentials)=> {
     //dispatch({ type: 'SET_AUTH', auth: response.data });
   };
 };
+
+export const register = (credentials)=> {
+  return async(dispatch)=> {
+    const response = await axios.post('/api/auth/register', credentials);
+    const token = response.data.token;
+    window.localStorage.setItem('token', token);
+    dispatch(loginWithToken());
+    
+  }
+}
 
 const reducer = combineReducers({
   products,

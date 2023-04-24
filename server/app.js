@@ -23,37 +23,8 @@ app.get('/api/products', async(req, res, next)=> {
   }
 });
 
-app.post('/api/auth', async(req, res, next)=> {
-  try{
-    const { username, password } = req.body;
-    const user = await User.findOne({
-      where: {
-        username,
-        password
-      }
-    });
-    if(!user){
-      res.status(401).send({ error: 'not authorized' });
-    }
-    else {
-      res.send({ token: jwt.sign({ id: user.id }, process.env.JWT) });
-    }
-  }
-  catch(ex){
-    next(ex);
-  }
-});
+app.use('/api/auth', require('./routes/auth'));
 
-app.get('/api/auth/:token', async(req, res, next)=> {
-  try{
-    const token = jwt.verify(req.params.token, process.env.JWT);
-    const user = await User.findByPk(token.id);
-    res.send(user);
-  }
-  catch(ex){
-    next(ex);
-  }
-});
 
 module.exports = app;
 
