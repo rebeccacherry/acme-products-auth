@@ -26,9 +26,7 @@ app.post('/register', async(req, res, next)=> {
 
 app.get('/:token', async(req, res, next)=> {
   try{
-    const token = jwt.verify(req.params.token, process.env.JWT);
-    const user = await User.findByPk(token.id);
-    res.send(user);
+    res.send(await User.findByToken(req.params.token));
   }
   catch(ex){
     next(ex);
