@@ -28,6 +28,12 @@ const User = conn.define('user', {
 User.prototype.generateToken = function(){
   return {token: jwt.sign({ id: this.id}, process.env.JWT)} // this = an instance of the User (one user)
 }
+
+User.register = async function(credentials){
+  const user = await this.create(credentials);
+  return user.generateToken();
+}
+
 module.exports = {
   Product,
   User,

@@ -29,9 +29,7 @@ app.post('/', async(req, res, next)=> {
 
 app.post('/register', async(req, res, next)=> {
   try{
-    const {username, password} = req.body;
-    const user = await User.create({username, password});
-    res.send(user.generateToken())
+    res.send(await User.register(req.body));
   }
   catch(ex){
     next(ex);
@@ -48,6 +46,11 @@ app.get('/:token', async(req, res, next)=> {
     next(ex);
   }
 });
+
+app.use((err, req, res, next)=> {
+  console.log(err)
+  res.status(500).send({ error: err })
+})
 
 module.exports = app;
 
