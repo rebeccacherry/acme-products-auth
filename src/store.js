@@ -55,6 +55,15 @@ export const login = (credentials)=> {
   };
 };
 
+export const updateAuth = (auth)=> {
+  return async(dispatch)=> {
+    const token = window.localStorage.getItem('token');
+    const response = await axios.put(`/api/auth/${token}`, auth);
+    dispatch({ type: 'SET_AUTH', auth: response.data});
+   
+  };
+};
+
 export const register = (credentials)=> {
   return async(dispatch)=> {
     const response = await axios.post('/api/auth/register', credentials);

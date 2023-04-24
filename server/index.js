@@ -14,8 +14,8 @@ app.listen(port, async()=> {
       Product.create({ name: 'bazz'}),
       Product.create({ name: 'quq'}),
       Product.create({ name: 'quq!!', inStock: false}),
-      User.create({ username: 'moe', password: 'm' }), 
-      User.create({ username: 'lucy', password: 'l' }), 
+      User.create({ username: 'moe', password: 'm', luckyNumber: 8}), 
+      User.create({ username: 'lucy', password: 'l', luckyNumber: 3}), 
     ]);
     console.log('seeded');
   }
