@@ -21,7 +21,8 @@ const User = conn.define('user', {
     unique: true
   },
   password: {
-    type: STRING
+    type: STRING,
+    unique: true
   },
 });
 
@@ -31,6 +32,22 @@ User.prototype.generateToken = function(){
 
 User.register = async function(credentials){
   const user = await this.create(credentials);
+  return user.generateToken();
+}
+
+User.authenticate = async function(credentials){
+  const { username, password} = credentials;
+  const user = await this.findOne({
+    where: {
+      username,
+      password
+    }
+  });
+  if(!user){
+    const error = Error('bad credentials');
+    error.status = 401;
+    throw error;
+  }
   return user.generateToken();
 }
 

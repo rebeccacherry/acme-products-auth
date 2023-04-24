@@ -25,5 +25,9 @@ app.get('/api/products', async(req, res, next)=> {
 
 app.use('/api/auth', require('./routes/auth'));
 
+app.use((err, req, res, next)=> {
+  console.log(err)
+  res.status(err.status || 500 ).send({ error: err  })
+})
 module.exports = app;
 

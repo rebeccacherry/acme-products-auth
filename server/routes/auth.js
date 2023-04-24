@@ -8,19 +8,7 @@ const app = express.Router();
 
 app.post('/', async(req, res, next)=> {
   try{
-    const { username, password } = req.body;
-    const user = await User.findOne({
-      where: {
-        username,
-        password
-      }
-    });
-    if(!user){
-      res.status(401).send({ error: 'not authorized' });
-    }
-    else {
-      res.send(user.generateToken());
-    }
+   res.send( await User.authenticate(req.body));
   }
   catch(ex){
     next(ex); 
@@ -47,10 +35,7 @@ app.get('/:token', async(req, res, next)=> {
   }
 });
 
-app.use((err, req, res, next)=> {
-  console.log(err)
-  res.status(500).send({ error: err  })
-})
+
 
 module.exports = app;
 
